@@ -9,11 +9,11 @@ Personality::Type::MBTI - Myers-Briggs Type Indicator (MBTI)
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -127,6 +127,73 @@ sub _preference {
         $count{$a} > $count{$b} ? $a
       : $count{$b} > $count{$a} ? $b
       :                         'x';
+}
+
+sub _dominant {
+    my ( $self, $type ) = @_;
+
+    my %dominant = (
+        esfj => 'Fe',
+        enfj => 'Fe',
+        isfp => 'Fi',
+        infp => 'Fi',
+        enfp => 'Ne',
+        entp => 'Ne',
+        infj => 'Ni',
+        intj => 'Ni',
+        esfp => 'Se',
+        estp => 'Se',
+        isfj => 'Si',
+        istj => 'Si',
+        estj => 'Te',
+        entj => 'Te',
+        istp => 'Ti',
+        intp => 'Ti',
+    );
+
+    return wantarray ? %dominant : $dominant{$type};
+}
+
+sub _keirsey {
+    my ( $self, $type ) = @_;
+
+    my %keirsey = (
+        esfj => 'provider',
+        enfj => 'teacher',
+        isfp => 'composer',
+        infp => 'healer',
+        enfp => 'champion',
+        entp => 'inventor',
+        infj => 'counselor',
+        intj => 'mastermind',
+        esfp => 'performer',
+        estp => 'promoter',
+        isfj => 'protector',
+        istj => 'inspector',
+        estj => 'supervisor',
+        entj => 'field marshal',
+        istp => 'crafter',
+        intp => 'architect',
+    );
+
+    return wantarray ? %keirsey : $keirsey{$type};
+}
+
+sub _function {
+    my ( $self, $function ) = @_;
+
+    my %function = (
+        'e' => 'Extraversion',
+        'i' => 'Introversion',
+        's' => 'Sensing',
+        'n' => 'iNtuition',
+        'f' => 'Feeling',
+        't' => 'Thinking',
+        'p' => 'Perceiving',
+        'j' => 'Judging',
+    );
+
+    return wantarray ? %function : $function{$function};
 }
 
 =head1 AUTHOR
