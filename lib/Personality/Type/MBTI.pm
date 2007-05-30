@@ -9,11 +9,11 @@ Personality::Type::MBTI - Myers-Briggs Type Indicator (MBTI)
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -102,9 +102,11 @@ sub type {
 
     foreach (@letters) {
         $_ = lc($_);
-        
-        next unless defined $count{$_};
-        $count{$_}++;
+
+        if ( my ($weight, $letter) = /^(\d*)\s*(\w)$/ ) {
+            $weight ||= 1;
+            $count{$letter} += $weight;
+        }
     }
 
     my $result =

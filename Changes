@@ -1,5 +1,8 @@
 Revision history for Personality-Type-MBTI
 
+0.02	2007-05-30
+	Accept weighted options (e.g. "2e", "3n", etc)
+
 0.01    2007-05-29
         First version, released on an unsuspecting world.
 
