@@ -103,7 +103,7 @@ sub type {
     foreach (@letters) {
         $_ = lc($_);
 
-        if ( my ($weight, $letter) = /^(\d*)\s*(\w)$/ ) {
+        if ( my ($weight, $letter) = /^([+-]?\d*)\s*(\w)$/ ) {
             $weight ||= 1;
             $count{$letter} += $weight;
         }
@@ -129,30 +129,38 @@ sub _preference {
       :                         'x';
 }
 
-sub _dominant {
+sub dominant {
     my ( $self, $type ) = @_;
+    my ( $ei, $ns, $ft, $jp ) = split(//, $type);
 
-    my %dominant = (
-        esfj => 'Fe',
-        enfj => 'Fe',
-        isfp => 'Fi',
-        infp => 'Fi',
-        enfp => 'Ne',
-        entp => 'Ne',
-        infj => 'Ni',
-        intj => 'Ni',
-        esfp => 'Se',
-        estp => 'Se',
-        isfj => 'Si',
-        istj => 'Si',
-        estj => 'Te',
-        entj => 'Te',
-        istp => 'Ti',
-        intp => 'Ti',
-    );
+    my $orient = $ei; # always
 
-    return wantarray ? %dominant : $dominant{$type};
+    my $function;
+    if ( $jp eq 'p' and $ei eq 'i' or $jp eq 'j' and $ei eq 'e' ) {
+        $function = $ft;
+    } elsif ( $jp eq 'p' and $ei eq 'e' or $jp eq 'j' and $ei eq 'i') {
+        $function = $ns;
+    }
+
+    return "$function$orient";
 }
+
+sub auxiliar {
+    my ( $self, $type ) = @_;
+    my ( $ei, $ns, $ft, $jp ) = split(//, $type);
+
+    my $orient = $ei eq 'i' ? 'e' : 'i'; # the opposite, always
+
+    my $function;
+    if ( $jp eq 'p' and $ei eq 'i' or $jp eq 'p' and $ei eq 'e' ) {
+        $function = $ft;
+    } elsif ( $jp eq 'j' and $ei eq 'e' or $jp eq 'j' and $ei eq 'i') {
+        $function = $ns;
+    }
+
+    return "$function$orient";
+}
+
 
 sub _keirsey {
     my ( $self, $type ) = @_;

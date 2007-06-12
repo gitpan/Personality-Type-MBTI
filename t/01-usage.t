@@ -1,6 +1,6 @@
 #!perl -T
 
-use Test::More tests => 36;
+use Test::More tests => 37;
 
 use Personality::Type::MBTI;
 
@@ -27,6 +27,12 @@ my $mbti = Personality::Type::MBTI->new();
     my $type = $mbti->type(qw( i i n n f f p p 2e 2s 2t 2j ));
     is( $type, "xxxx", "simple test: weighted values" );
 }
+
+{
+    my $type = $mbti->type(qw( -1i -1n -1f -1p ));
+    is( $type, "estj", "simple test: negative values" );
+}
+
 
 
 # test all the types
