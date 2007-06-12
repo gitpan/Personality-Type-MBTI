@@ -9,11 +9,11 @@ Personality::Type::MBTI - Myers-Briggs Type Indicator (MBTI)
 
 =head1 VERSION
 
-Version 0.03
+Version 0.05
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.05';
 
 =head1 SYNOPSIS
 
@@ -129,6 +129,13 @@ sub _preference {
       :                         'x';
 }
 
+=head2 dominant
+
+Receives a personality type (e.g. "infp") and returns its dominant
+function (in this case, "fi" - introverted feeling).
+
+=cut
+
 sub dominant {
     my ( $self, $type ) = @_;
     my ( $ei, $ns, $ft, $jp ) = split(//, $type);
@@ -145,7 +152,14 @@ sub dominant {
     return "$function$orient";
 }
 
-sub auxiliar {
+=head2 auxiliary
+
+Receives a personality type (e.g. "infp") and returns its auxiliary
+function (in this case, "ne" - extroverted intuition).
+
+=cut
+
+sub auxiliary {
     my ( $self, $type ) = @_;
     my ( $ei, $ns, $ft, $jp ) = split(//, $type);
 
@@ -160,7 +174,6 @@ sub auxiliar {
 
     return "$function$orient";
 }
-
 
 sub _keirsey {
     my ( $self, $type ) = @_;

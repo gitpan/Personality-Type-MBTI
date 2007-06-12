@@ -1,5 +1,8 @@
 Revision history for Personality-Type-MBTI
 
+0.05	2007-06-12
+	Fixed documentation and distribution meta files
+
 0.04	2007-06-12
 	Algorithm to calculate dominant/auxiliar function
 

@@ -40,7 +40,7 @@ for my $w (qw/e i/) {
     }
 }
 
-my %auxiliar = (
+my %auxiliary = (
     enfj => 'ni',
     enfp => 'fi',
     entj => 'ni',
@@ -67,11 +67,9 @@ for my $w (qw/e i/) {
             for my $z (qw/p j/) {
                 my @test     = ( $w, $x, $y, $z ) x 4;
                 my $type     = $mbti->type(@test);
-                my $auxiliar = $mbti->auxiliar($type);
-                is( $auxiliar, $auxiliar{$type}, "auxiliar($type) is $auxiliar{$type}" );
+                my $auxiliary = $mbti->auxiliary($type);
+                is( $auxiliary, $auxiliary{$type}, "auxiliary($type) is $auxiliary{$type}" );
             }
         }
     }
 }
-
-
